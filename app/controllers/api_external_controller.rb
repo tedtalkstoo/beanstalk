@@ -8,7 +8,8 @@ class ApiExternalController < ApplicationController
   def blank_api
     sleep(0.01)
     response = { synccode: 0, size: params[:random_data].bytesize }
-    render_json response
+    render json: response
+
   end
 
   def set_action_start_timing
