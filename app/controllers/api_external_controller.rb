@@ -1,3 +1,6 @@
+require Rails.root.join('lib/metrics/print_request_timings')
+require Rails.root.join('lib/metrics/request_timings')
+
 class ApiExternalController < ApplicationController
 
   before_filter :set_action_start_timing
@@ -17,7 +20,7 @@ class ApiExternalController < ApplicationController
   end
 
   def print_request_timings
-    Metrics::PrintRequestTimings.call(request.headers, params, @action_start)
+    ::Metrics::PrintRequestTimings.call(request.headers, params, @action_start)
   end
 
 end

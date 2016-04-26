@@ -1,7 +1,8 @@
 module Metrics
   class PrintRequestTimings
-
-    include Service
+    def self.call(*args)
+     new(*args).call
+    end
 
     def initialize(*args)
       @timings = Metrics::RequestTimings.new(*args)
@@ -21,6 +22,7 @@ module Metrics
       return unless value
       formatted_value = '%.6f' % value.round(6)
       puts "request_timing[#{type}] #{formatted_value} #{timings.request_id}"
+      Rails.logger.info "request_timing[#{type}] #{formatted_value} #{timings.request_id}"
     end
 
   end
